@@ -1,13 +1,15 @@
-let intervalId;
+let intervalId, currenNumSpan;
 const MIN = 1;
 const MAX = 91;
 
 function getRandomNum(numMin, numMax) {
   let num = Math.round(Math.random() * (numMax - numMin) + numMin);
   console.log(num);
-  document.getElementById(num).style.backgroundColor = "green";
-  document.getElementById(num).style.color = "lightblue";
-  document.getElementById(num).style.font = "italic bold 20px arial,serif";
+  currenNumSpan.innerHTML = num;
+  // document.getElementById(num).style.backgroundColor = "green";
+  // document.getElementById(num).style.color = "#00f3ff";
+  // document.getElementById(num).style.font = "italic bold 20px arial,serif";
+  document.getElementById(num).className = "selectedval";
 }
 
 function startPick() {
@@ -39,4 +41,5 @@ function renderTable() {
 
 window.onload = function() {
     renderTable();
+    currenNumSpan = document.getElementById("currentNum");
 };

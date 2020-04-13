@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #18191f;
+}
+
+td
+{
+    font-size: 40px;
+    color: #555;
+    width: 50px;
+    height: 50px;
+    background: #18191f;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 15px;
+    border: 3px;
+    box-shadow: -2px -2px 3px rgba(255,255,255,0.05),
+                3px 3px 3px rgba(0,0,0,0.2)
+}
+
+tr {
+  background: lightblue;
+  border-color: white;
+ }
+
+.selectedval {
+    color: #4cec17;
+    text-shadow: 0 0 20px #4cec17;
+    transition: 0.7s;
+    background: #000;
+    border: 3px  solid #fff;
+}
