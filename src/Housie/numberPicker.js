@@ -1,26 +1,41 @@
 let intervalId, currenNumSpan;
-const MIN = 1;
-const MAX = 91;
+let game = 0; // 0 is used for false/off and 1 is used for true/on
+let numArr = [], shuffledArr = [];
+let gameDur = 5000;
+let count = 0;
 
-function getRandomNum(numMin, numMax) {
-  let num = Math.round(Math.random() * (numMax - numMin) + numMin);
-  console.log(num);
+function housieNumberPic() {
+  // console.log(num);
+  let num = numArr[count++];
   currenNumSpan.innerHTML = num;
-  // document.getElementById(num).style.backgroundColor = "green";
-  // document.getElementById(num).style.color = "#00f3ff";
-  // document.getElementById(num).style.font = "italic bold 20px arial,serif";
   document.getElementById(num).className = "selectedval";
 }
 
-function startPick() {
+function shuffleArray(arr) {
+  let len = arr.length;
+  let randomNum, temp;
+
+  for(let i=len-1; i > 0; i-- ) {
+    randomNum = Math.floor(Math.random() * (i+1) );
+    temp = arr[i];
+    arr[i] = arr[randomNum];
+    arr[randomNum] = temp;
+  }
+  return arr;
+}
+
+function startPick(duration) {
+  console.log(intervalId);
   if (intervalId === undefined || intervalId === null) {
-    intervalId = setInterval(getRandomNum, 3000, MIN, MAX);
+    intervalId = setInterval(housieNumberPic, duration);
+    game = 1;
   }
 }
 
 function pausePick() {
   clearInterval(intervalId);
   intervalId = null;
+  game = 0;
 }
 
 function renderTable() {
@@ -28,6 +43,7 @@ function renderTable() {
   var mytable = '<table cellpadding="10" cellspacing="10"><tbody><tr>';
 
   for (var i = 1; i < 91; i++) {
+    numArr[i-1] = i;
     if (i % 10 == 1) {
       mytable += "</tr><tr>";
     }
@@ -39,7 +55,18 @@ function renderTable() {
   hDiv.innerHTML = mytable;
 }
 
-window.onload = function() {
-    renderTable();
-    currenNumSpan = document.getElementById("currentNum");
+window.onload = function () {
+  renderTable();
+  currenNumSpan = document.getElementById("currentNum");
+  shuffledArr = shuffleArray(numArr);
 };
+
+document.addEventListener("keypress", function (event) {
+  if (event.keyCode === 32) {
+    if (game === 0) {
+      startPick(gameDur);
+    } else {
+      pausePick();
+    }
+  }
+});
