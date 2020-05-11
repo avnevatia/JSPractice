@@ -1,12 +1,15 @@
 let intervalId, currenNumSpan;
 let game = 0; // 0 is used for false/off and 1 is used for true/on
 let numArr = [], shuffledArr = [];
-let gameDur = 5000;
+let gameDur = 8000;
 let count = 0;
 
 function housieNumberPic() {
   // console.log(num);
   let num = numArr[count++];
+  if(count >= 90) {
+    pausePick();
+  }
   currenNumSpan.innerHTML = num;
   document.getElementById(num).className = "selectedval";
 }
